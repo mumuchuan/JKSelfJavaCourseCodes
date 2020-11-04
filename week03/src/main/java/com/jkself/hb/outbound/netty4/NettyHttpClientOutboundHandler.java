@@ -30,13 +30,11 @@ public class NettyHttpClientOutboundHandler  extends ChannelInboundHandlerAdapte
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if (msg instanceof HttpResponse) {
             HttpResponse response = (HttpResponse) msg;
-//    todo 怎么写进去        ctx.write(response).addListener(ChannelFutureListener.CLOSE);
             System.out.println("CONTENT_TYPE:" + response.headers().get(HttpHeaders.Names.CONTENT_TYPE));
         }
         if (msg instanceof HttpContent) {
             HttpContent content = (HttpContent) msg;
             ByteBuf buf = content.content();
-//    todo        ctx.write(content);
             System.out.println("--------------------------------------------->【NettyClient】请求结果:" + buf.toString(io.netty.util.CharsetUtil.UTF_8));
             buf.release();
         }
